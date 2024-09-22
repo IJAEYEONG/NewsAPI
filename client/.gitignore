@@ -1,0 +1,53 @@
+# Node.js 관련
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# TypeScript
+*.tsbuildinfo
+
+# 빌드 결과물
+dist/
+build/
+
+# 환경 설정 파일
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Next.js 관련
+.next/
+out/
+
+# Babel 관련
+.babelrc
+.babelrc.js
+.babelrc.json
+.babelrc.mjs
+.babelignore
+
+# ESLint 관련
+.eslintcache
+
+# TypeORM 관련
+ormconfig.js
+ormconfig.ts
+
+# 기타
+coverage/
+*.sublime-project
+*.sublime-workspace
+.vscode/
+.DS_Store
+Thumbs.db
