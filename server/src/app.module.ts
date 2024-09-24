@@ -15,9 +15,9 @@ import { Favorite } from './favorites/favorites.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
-      port: 5432,
+      port: 5433,
       username: 'postgres',
-      password: '1234',
+      password: '0000',
       database: 'news',
       entities: [User, Favorite],
       synchronize: true,

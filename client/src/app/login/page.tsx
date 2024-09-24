@@ -87,12 +87,12 @@ export default function Login() {
         >
           회원가입
         </button>
-        {/* <button
+        {<button
           onClick={() => (window.location.href = 'http://localhost:4000/auth/kakao-login')}
           className="w-full bg-yellow-400 text-black py-2 rounded-lg hover:bg-yellow-500 transition duration-300 mt-4"
         >
-          카카오톡으로 로그인
-        </button> */}
+          카카오톡 로그인
+        </button> }
 
         {/* 회원가입 버튼 추가 */}
         

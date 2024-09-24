@@ -41,30 +41,49 @@ export default function Register() {
   };
 
   return (
-    <div>
-      <h1>회원가입</h1>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="이름"
-      />
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="이메일"
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="비밀번호"
-      />
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button onClick={handleRegister} disabled={isLoading}>
-        {isLoading ? '회원가입 중...' : '회원가입'}
-      </button>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
+        <h1 className="text-2xl font-bold mb-6 text-center">회원가입</h1>
+        
+        {/* 이름 입력 필드 */}
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="이름"
+          className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+        />
+        
+        {/* 이메일 입력 필드 */}
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="이메일"
+          className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+        />
+        
+        {/* 비밀번호 입력 필드 */}
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="비밀번호"
+          className="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+        />
+
+        {/* 오류 메시지 */}
+        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+        
+        {/* 회원가입 버튼 */}
+        <button
+          onClick={handleRegister}
+          disabled={isLoading}
+          className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-300"
+        >
+          {isLoading ? '회원가입 중...' : '회원가입'}
+        </button>
+      </div>
     </div>
   );
 }
