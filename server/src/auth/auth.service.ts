@@ -5,13 +5,14 @@ import { User } from '../users/user.entity'; // User 엔티티 임포트
 import { CreateUserDto } from '../dto/create-user.dto';
 import { LoginUserDto } from 'src/dto/LoginUserDto';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt'; // JwtService 임포트 추가
 
 @Injectable()
 export class AuthService {
-  jwtService: any;
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private readonly jwtService: JwtService, // JwtService 주입
   ) {}
 
   // 회원가입 함수
@@ -50,10 +51,7 @@ export class AuthService {
     return newUser;
   }
 
-  // 로그인 함수
-  // auth.service.ts
-  // auth.service.ts
-  // auth.service.ts - 로그인 성공 시 userId와 access_token을 반환
+  // 로그인 함수 - 로그인 성공 시 userId와 access_token을 반환
   async login(loginUserDto: LoginUserDto) {
     try {
       const user = await this.userRepository.findOne({
@@ -75,7 +73,12 @@ export class AuthService {
         throw new Error('비밀번호가 틀렸습니다.');
       }
 
-      const accessToken = this.jwtService.sign({ userId: user.id }); // JWT 토큰 생성
+      // JWT 토큰 생성 시 만료 시간 설정
+      const accessToken = this.jwtService.sign(
+        { userId: user.id }, // 페이로드에 userId 포함
+        { expiresIn: '1h' }, // 토큰의 만료 시간을 1시간으로 설정
+      );
+
       return { userId: user.id, access_token: accessToken }; // userId와 access_token 함께 반환
     } catch (error) {
       console.error('로그인 에러:', error.message);

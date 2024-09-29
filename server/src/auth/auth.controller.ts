@@ -1,21 +1,19 @@
 import {
   Controller,
-  Get,
   Post,
   Body,
   HttpException,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { LoginUserDto } from 'src/dto/LoginUserDto';
+import { JwtAuthGuard } from 'src/users/jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
-  userRepository: any;
   constructor(private readonly authService: AuthService) {}
-
-  // 회원가입 엔드포인트
   @Post('register')
   async register(@Body() createUserDto: CreateUserDto) {
     try {
@@ -29,14 +27,11 @@ export class AuthController {
     }
   }
 
-  // 로그인 엔드포인트
   @Post('login')
   async login(@Body() loginUserDto: LoginUserDto) {
     try {
       const result = await this.authService.login(loginUserDto);
-
-      // 로그인 성공 시 userId 반환
-      return { userId: result.userId };
+      return { userId: result.userId, access_token: result.access_token };
     } catch (error) {
       throw new HttpException(
         '로그인에 실패했습니다.',
@@ -45,9 +40,9 @@ export class AuthController {
     }
   }
 
-  // 카카오 로그인 엔드포인트 (임시)
-  @Get('kakao-login')
-  async kakaoLogin() {
-    // 카카오톡 OAuth 로그인 처리
+  @Post('validate-token')
+  @UseGuards(JwtAuthGuard)
+  async validateToken() {
+    return { valid: true };
   }
 }
